@@ -10,8 +10,10 @@ typedef struct{
 } Vertex;
 
 typedef struct{
+    char name[50];
     int from;
     int to;
+    double weight;
 }Edge;
 
 typedef struct{
