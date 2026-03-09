@@ -7,7 +7,7 @@ Graph* create_graph(int num_vertices, int num_edges) {
     
     Graph *graph = (Graph*)malloc(sizeof(Graph));
     if (graph == NULL) {
-        fprintf(stderr, "Error: Failed to allocate memory for the main graph structure!\n");
+        fprintf(stderr, "Błąd [4]: Brak pamięci operacyjnej do przetworzenia grafu.\n");
         return NULL;
     }
 
@@ -19,7 +19,7 @@ Graph* create_graph(int num_vertices, int num_edges) {
     if (num_vertices > 0) {
         graph->vertices = (Vertex*)malloc(num_vertices * sizeof(Vertex));
         if (graph->vertices == NULL) { 
-            fprintf(stderr, "Error: Memory allocation failed for vertices!\n");
+            fprintf(stderr, "Błąd [4]: Brak pamięci operacyjnej do przetworzenia grafu.\n");
             free(graph);
             return NULL;
         }
@@ -28,7 +28,7 @@ Graph* create_graph(int num_vertices, int num_edges) {
     if (num_edges > 0) {
         graph->edges = (Edge*)malloc(num_edges * sizeof(Edge));
         if (graph->edges == NULL) {
-            fprintf(stderr, "Error: Memory allocation failed for edges!\n");
+            fprintf(stderr, "Błąd [4]: Brak pamięci operacyjnej do przetworzenia grafu.\n");
             free(graph->vertices);
             graph->vertices = NULL;
             free(graph);
@@ -61,17 +61,17 @@ void destroy_graph(Graph **graph) {
 
 bool is_graph_valid(const Graph *graph) {
     if (graph == NULL) {
-        fprintf(stderr, "Error: Graph pointer is NULL.\n");
+        fprintf(stderr, "Błąd [5]: Wskaźnik na graf jest pusty (NULL).\n");
         return false;
     }
 
     if (graph->num_vertices <= 0) {
-        fprintf(stderr, "Error: Graph must have at least 1 vertex.\n");
+        fprintf(stderr, "Błąd [5]: Graf musi mieć co najmniej 1 wierzchołek.\n");
         return false;
     }
 
     if (graph->num_edges < 0) {
-        fprintf(stderr, "Error: Number of edges cannot be negative.\n");
+        fprintf(stderr, "Błąd [5]: Liczba krawędzi nie może być ujemna.\n");
         return false;
     }
 
@@ -80,7 +80,7 @@ bool is_graph_valid(const Graph *graph) {
         int to = graph->edges[i].to;
 
         if (from < 0 || from >= graph->num_vertices || to < 0 || to >= graph->num_vertices) {
-            fprintf(stderr, "Error: Edge %d connects invalid vertices (%d to %d).\n", i, from, to);
+            fprintf(stderr, "Błąd [5]: Krawędź %d łączy nieistniejące wierzchołki (%d i %d).\n", i, from, to);
             return false;
         }
     }
